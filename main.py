@@ -1,6 +1,8 @@
-import ImageGrab
+import time
+import screengrab
 
 while True:
     time.sleep(0.5)
-    img=ImageGrab.grab()
+    img = screengrab.grab_screen()
     print(img)
+    input()
