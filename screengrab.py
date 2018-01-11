@@ -13,13 +13,16 @@ def screen_record():
     while(True):
         last_time = time.time()
         img = ImageGrab.grab()
-        img =  np.array(img)
-        #img = cv2.resize( img , (int(1920/3), int(1080/3)) )
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_og =  np.array(img)
+        img_og = cv2.cvtColor(img_og, cv2.COLOR_BGR2RGB)
+
+        img = cv2.resize( img_og , (int(1920/40), int(1080/40)) )
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
         cal_stuff( img , adress , loop )
 
-        cv2.imshow('window',img)
+        cv2.imshow('souce',img_og)
+        cv2.imshow('output',img)
         cv2.waitKey(1)
         time_taken = time.time()-last_time
         print("FPS: " + str(1/time_taken))
@@ -84,8 +87,16 @@ def press_keys(inputs):
 
     return
 
-input()
-time.sleep(5)
+
+
+print("press esc button to start: ")
+while keyboard.is_pressed("esc") == False :
+    time.sleep(0.01)
+
+for loop in range(5):
+    time.sleep(1)
+    print(str(loop+1))
+print("started")
 
 screen_record()
 
