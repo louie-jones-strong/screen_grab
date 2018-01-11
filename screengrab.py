@@ -16,7 +16,7 @@ def screen_record():
         img_og =  np.array(img)
         img_og = cv2.cvtColor(img_og, cv2.COLOR_BGR2RGB)
 
-        img = cv2.resize( img_og , (int(1920/40), int(1080/40)) )
+        img = cv2.resize( img_og , (int(1920/10), int(1080/10)) )
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
         cal_stuff( img , adress , loop )
@@ -94,8 +94,8 @@ while keyboard.is_pressed("esc") == False :
     time.sleep(0.01)
 
 for loop in range(5):
-    time.sleep(1)
     print(str(loop+1))
+    time.sleep(1)
 print("started")
 
 screen_record()
