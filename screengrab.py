@@ -6,19 +6,18 @@ import keyboard
 import random
 
 def screen_record(): 
-    time.sleep(5)
-    adress = "data_set.txt"
-    #file = open(adress,"w")
-    #file.close()
+    adress = "dataset\\"
+    file = open(adress + "data-set.txt","w")
+    file.close()
     loop = 0
     while(True):
         last_time = time.time()
-        img = ImageGrab.grab(bbox=(0,0,1920,1080))
+        img = ImageGrab.grab()
         img =  np.array(img)
-        img = cv2.resize( img , (int(1920/3), int(1080/3)) )
+        #img = cv2.resize( img , (int(1920/3), int(1080/3)) )
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        #cal_stuff( img , adress )
+        cal_stuff( img , adress , loop )
 
         cv2.imshow('window',img)
         cv2.waitKey(1)
@@ -26,7 +25,7 @@ def screen_record():
         print("FPS: " + str(1/time_taken))
         loop += 1
 
-def cal_stuff( input , adress ):
+def cal_stuff( img , adress , image_number ):
     output = ["0","0","0","0"]
 
     if keyboard.is_pressed('w'):
@@ -41,11 +40,22 @@ def cal_stuff( input , adress ):
     if keyboard.is_pressed('d'):
         output[3] = "1"
 
+
+
+
     print(output)
-    file = open(adress,"a")
-    #file.write("!" + ",".join(output) + "\n")
-    file.write(str(output[2]) + "\n")
+    output = ",".join(output)
+    save( adress , img , output , image_number )
+    return
+
+def save( adress , input_image , output , image_number ):
+    image_path = "images//" + str(image_number) + ".png"
+    file = open(adress + "data-set.txt","a")
+    file.write(image_path + "!" + str(output) + "\n")
     file.close()
+
+    cv2.imwrite(adress + image_path,input_image)
+
     return
 
 def press_keys(inputs):
@@ -73,14 +83,16 @@ def press_keys(inputs):
 
     return
 
+input()
 time.sleep(5)
+
+screen_record()
+
+
 while True:
-    inputs = [str(random.randint(0,1)),str(random.randint(0,1)),str(random.randint(0,1)),str(random.randint(0,1))]
+    inputs = ["1",str(random.randint(0,1)),"0",str(random.randint(0,1))]
     #inputs = ["1"]
     press_keys(inputs)
     time.sleep(0.2)
     if keyboard.is_pressed('esc'):
         input()
-
-
-#screen_record()
