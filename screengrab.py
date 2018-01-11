@@ -25,6 +25,7 @@ def screen_record():
         print("FPS: " + str(1/time_taken))
         loop += 1
 
+
 def cal_stuff( img , adress , image_number ):
     output = ["0","0","0","0"]
 
