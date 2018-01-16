@@ -1,5 +1,5 @@
 import numpy as np
-from screen_grab import grab_screen as grab_screen
+from screen_grab import grab_screen2 as grab_screen
 import cv2 
 import os
 import time
@@ -24,7 +24,7 @@ def screen_record():
         height  = region[3] - region[1] 
 
         img = cv2.resize( img_og , (int(width/10), int(height/10)) )
-        img = img[  0:58 , 0:192 ]#croped
+        #img = img[  0:58 , 0:192 ]#croped
 
         data_set += cal_stuff( img )
 
@@ -44,6 +44,7 @@ def screen_record():
             print("stoped!")
             join_files( address , batch_size )
             loop = 0
+            data_set = []
             play_sound()
             pause()
     return
