@@ -1,5 +1,5 @@
 import numpy as np
-from screen_grab import grab_screen2 as grab_screen
+from screen_grab import grab_screen as grab_screen
 import cv2 
 import os
 import time
